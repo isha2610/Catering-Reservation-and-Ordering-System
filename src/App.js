@@ -1,27 +1,29 @@
 // import { firebase } from "..firebase";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
+import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp";
 import "bootstrap";
-import UploadProducts from "./UploadProducts";
-import ViewOrders from "./ViewOrders";
-import CartOrderplace from "./cartOrderplace";
-import ViewProducts from "./ViewProducts";
-import MyProfile from "./myProfile";
-import Home from "./Home";
-import { BrowserRouter, Router, Route } from "react-router-dom";
+import UploadProducts from "./components/UploadProducts";
+import ViewOrders from "./components/ViewOrders";
+import CartOrderplace from "./components/cartOrderplace";
+import ViewProducts from "./components/ViewProducts";
+import MyProfile from "./components/MyProfile";
+import Home from "./components/Home"; // home renders to nav, sign in and sign up
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <div>
       <BrowserRouter>
-      <Home/>
-      <Route path="/" element={<Home/>}/>
-          <Route path="/signup" element={<SignUp/>}/>
-          <Route path="/signin" element={<SignIn/>}/>
-          <Route path="/uploadproducts" element={<UploadProducts/>}/>
-          <Route path="/vieworders" element={<ViewOrders/>}/>
-          <Route path="/cart" element={<CartOrderplace/>}/>
-          <Route path="/products" element={<ViewProducts/>}/>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/signup" element={<SignUp/>}/>
+        <Route path="/signin" element={<SignIn/>}/>
+        <Route path="/uploadproducts" element={<UploadProducts/>}/>
+        <Route path="/vieworders" element={<ViewOrders/>}/>
+        <Route path="/cart" element={<CartOrderplace/>}/>
+        <Route path="/products" element={<ViewProducts/>}/>
+        <Route path="/profile" element={<MyProfile/>}/>
+        </Routes>
       </BrowserRouter>
 
       

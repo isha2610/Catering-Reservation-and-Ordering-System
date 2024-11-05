@@ -1,4 +1,5 @@
 import React from 'react'
+import { getFirestore, query, getDocs, collection, where, addDoc} from "firebase/firestore";
 
 const ViewProducts = () => {
   return (
