@@ -4,7 +4,7 @@ import Alert from "react-bootstrap/Alert";
 import Form from 'react-bootstrap/Form';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
+// import { doc, getDoc } from "firebase/firestore";
 import { auth } from "../Config/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 // import { getFirestore, query, getDocs, collection, where, addDoc} from "firebase/firestore";

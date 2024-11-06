@@ -3,10 +3,10 @@ import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link } from "react-router-dom";
-import { auth, fs, storage } from "../Config/firebase";
-// import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, fs } from "../Config/firebase";
 import { useNavigate } from "react-router-dom";
 import { doc, addDoc, collection } from "firebase/firestore";
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 // SIGN UP FOR DIFFERENT ROLES DIFFERENTLY
 
 const SignUp = () => {
@@ -16,29 +16,39 @@ const SignUp = () => {
     const[name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    // const [position, setPosition] = useState("");
+    const [position, setPosition] = useState("");
     const [successMsg, setSuccessMsg] = useState("");
     const[errorMsg, setErrorMsg] = useState("");
     const [show, setShow] = useState(true);
 
     const handleSignUp = async (e) => {
       e.preventDefault();
+      
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // .then(async ()=>{
+      // })
+      // .catch((error)=>{setErrorMsg(error.message)})
+
       await addDoc(collection(fs, 'Users'), {
-          'FullName': name,
-          'Email': email,
-          'Password': password
-      })
-      .then(()=>setSuccessMsg('Sign Up Successful. You are being redirected to Login Page!'),
-          setName(''),
-          setEmail(''),
-          setPassword(''),
-          setErrorMsg(''),
-          setTimeout(()=>{
-            setSuccessMsg('');
-            navigate('/signin');
-          }, 3000)
-      )
-      .catch((error)=>{setErrorMsg(error.message)});
+        'FullName': name,
+        'Email': email,
+        'Password': password,
+        'Position': position
+    })
+    .then(()=>setSuccessMsg('Sign Up Successful. You are being redirected to Login Page!'),
+        setName(''),
+        setEmail(''),
+        setPassword(''),
+        setErrorMsg(''),
+        setTimeout(()=>{
+          setSuccessMsg('');
+          navigate('/signin');
+        }, 3000)
+    )
+    .catch((error)=>{setErrorMsg(error.message)});
+      
     }
 
   return (
@@ -63,10 +73,10 @@ const SignUp = () => {
         <Form.Label>Password</Form.Label>
         <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
       </Form.Group>
-      {/* <Form.Group className="mb-3" controlId="formBasicRadio">
-        <Form.Check type="radio" label="admin" value={position} />
-        <Form.Check type="radio" label="user" value={position}/>
-      </Form.Group> */}
+      <Form.Group className="mb-3" controlId="formBasicRadio" required>
+        <Form.Check type="radio" label="admin" value="admin" onChange={(e) => setPosition(e.target.value)}/>
+        <Form.Check type="radio" label="user" value="user" onChange={(e) => setPosition(e.target.value)}/>
+      </Form.Group>
       <Button variant="primary" type="submit">
         Submit
       </Button>

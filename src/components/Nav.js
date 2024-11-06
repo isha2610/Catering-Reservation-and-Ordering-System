@@ -1,20 +1,20 @@
 import {React, useState} from 'react'
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import Button from 'react-bootstrap/Button';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from '../Config/firebase';
 // SIGN IN CHECK AND NAME OF THE USER CAN BE SHOWN HERE!
 
 
-const Nav = () => {
+const Nav = ({user}) => {
     // let signedIn = true;
+    const navigate = useNavigate();
 
-    // const [username, setUsername] = useState("");
+    console.log(user);
 
-    const SignOut = () => {
-        signOut(auth);
+    function handleSignOut() {
+        signOut(auth).then(()=>navigate('/signin'));
     }
 
   return (
@@ -24,16 +24,18 @@ const Nav = () => {
             <Navbar.Brand href="#home">Catering Reservation & Ordering System</Navbar.Brand>
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">
-                (!User && 
-                <>
-                    <Link to="/signup" style={{all: 'unset'}}><Button className='nav-btn' style={{all: 'unset'}}>Sign Up </Button> &nbsp; </Link>
-                    <Link to="/signin" style={{all: 'unset'}}><Button className='nav-btn' style={{all: 'unset'}}>Sign In</Button> </Link>
-                </>)
-                (User && 
-                <>
-                    <Navbar.Text>Signed in as: <a href="#login">{}</a></Navbar.Text>
+                {(!user && <>
+                    <Link to="/signup" style={{all: 'unset', cursor:'pointer'}}>Sign Up &nbsp; </Link>
+                    <Link to="/signin" style={{all: 'unset', cursor:'pointer'}}>Sign In</Link>
                 </>
-                )
+                )}
+                {(user && 
+                    <>
+                    <Link to="/" style={{all: 'unset', cursor:'pointer'}}>{user} &nbsp; </Link>
+                    <Link to="/cart" style={{all: 'unset', cursor:'pointer'}}>Cart &nbsp; </Link>
+                    <Link onClick={handleSignOut} style={{all: 'unset', cursor:'pointer'}}>Sign Out</Link>
+                    </>
+                )}
             </Navbar.Collapse>
         </Container>
         </Navbar>
