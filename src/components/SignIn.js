@@ -64,9 +64,9 @@ const SignIn = () => {
         <Form.Check type="radio" label="admin" value={position} />
         <Form.Check type="radio" label="user" value={position}/>
       </Form.Group> */}
-      <Button variant="primary" type="submit">
+      <button variant="primary" type="submit">
         Submit
-      </Button>
+      </button>
     </Form>
     <div>
       <span><br/>Don't have an account? Sign Up <Link to='/signup'>Here</Link>.</span>

@@ -24,18 +24,18 @@ const Nav = ({user}) => {
             <Navbar.Brand href="#home">Catering Reservation & Ordering System</Navbar.Brand>
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">
-                {(!user && <>
+                {/* {(!user && <> */}
                     <Link to="/signup" style={{all: 'unset', cursor:'pointer'}}>Sign Up &nbsp; </Link>
                     <Link to="/signin" style={{all: 'unset', cursor:'pointer'}}>Sign In</Link>
-                </>
-                )}
-                {(user && 
+                {/* </> */}
+                {/* )} */}
+                {/* {(user && 
                     <>
                     <Link to="/" style={{all: 'unset', cursor:'pointer'}}>{user} &nbsp; </Link>
                     <Link to="/cart" style={{all: 'unset', cursor:'pointer'}}>Cart &nbsp; </Link>
                     <Link onClick={handleSignOut} style={{all: 'unset', cursor:'pointer'}}>Sign Out</Link>
                     </>
-                )}
+                )} */}
             </Navbar.Collapse>
         </Container>
         </Navbar>

@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth,fs } from "../Config/firebase";
 import { collection, doc, getDoc } from "firebase/firestore";
+import Slider from './img/imageSlider';
 
 const Home = () => {
 
@@ -47,7 +48,8 @@ const Home = () => {
   return (
     <div>
       <Nav user={user}/>
-      <ViewProducts/>
+      {/* <ViewProducts/> */}
+      <Slider/>
     </div>
   )
 }

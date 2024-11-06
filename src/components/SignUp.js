@@ -45,7 +45,7 @@ const SignUp = () => {
         setTimeout(()=>{
           setSuccessMsg('');
           navigate('/signin');
-        }, 3000)
+        }, 9000)
     )
     .catch((error)=>{setErrorMsg(error.message)});
       
